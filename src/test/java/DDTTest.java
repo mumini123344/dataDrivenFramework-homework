@@ -1,9 +1,8 @@
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
-import org.openqa.selenium.By;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import sqlData.Sql;
+import sqlHomeworkOne.Sql;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,6 +14,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 
 public class DDTTest {
+
 
     @BeforeTest
     public void setUp() {
@@ -34,8 +34,7 @@ public class DDTTest {
         SelenideElement lastName = $("#lastName");
         SelenideElement phoneNumber = $("#userNumber");
 
-        String table = "SELECT firstname, lastname, phone" +
-                "FROM student";
+        String table = "SELECT * FROM dbo.[students]";
 
         try (Connection conn = Sql.getConnection();
              Statement stmt = conn.createStatement();
@@ -43,8 +42,8 @@ public class DDTTest {
 
             while (rs.next()) {
                 firstName.setValue(rs.getString("firstname"));
-                lastName.setValue(rs.getString("firstname"));
-                phoneNumber.setValue(rs.getString("firstname"));
+                lastName.setValue(rs.getString("lastname"));
+                phoneNumber.setValue(rs.getString("phone"));
 
                 firstName.clear();
                 lastName.clear();
