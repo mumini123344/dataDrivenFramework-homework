@@ -1,4 +1,4 @@
-package sqlData;
+package sqlHomeworkOne;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,7 +12,7 @@ public class Sql {
     public static Connection getConnection() throws SQLException {
         Connection conn = null;
 
-        try (FileInputStream f = new FileInputStream("C:\\Users\\toros\\OneDrive\\Desktop\\dataDrivenFramework\\src\\main\\resources\\db.properties")) {
+        try (FileInputStream f = new FileInputStream("src/main/resources/db.properties")) {
             Properties pros = new Properties();
             pros.load(f);
 
@@ -20,6 +20,7 @@ public class Sql {
             String user = pros.getProperty("user");
             String password = pros.getProperty("password");
             conn = DriverManager.getConnection(url, user, password);
+
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
